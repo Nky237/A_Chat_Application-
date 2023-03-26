@@ -11,13 +11,14 @@ import {
   limit,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import SideBar from "../components/SideBar";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
   const [user] = useAuthState(auth);
   const logout = () => {
     // setUser(false);
-    alert('hello')
+    alert("hello");
   };
   useEffect(() => {
     const q = query(
@@ -35,23 +36,28 @@ const ChatBox = () => {
     return () => unsubscribe;
   }, []);
   return (
-    <div className="chatty">
-      ChatBox
-      <button onClick={logout}>Log out</button>
-      {messages.map((message) => (
-        <div className={`chat-bubble ${message.uid === user.uid ? "right" : ""}`}>
-          <img
-            className="chat-bubble__left"
-            src={message.avatar}
-            alt="user avatar"
-          />
-          <div key={message.id}>
-            <p className="user-name">{message.name}</p>
-            <p className="user-message">{message.text}</p>
+    <div className="my_Chat">
+      <SideBar />
+      <div className="chatty">
+        ChatBox
+        <button onClick={logout}>Log out</button>
+        {messages.map((message) => (
+          <div
+            className={`chat-bubble ${message.uid === user.uid ? "right" : ""}`}
+          >
+            <img
+              className="chat-bubble__left"
+              src={message.avatar}
+              alt="user avatar"
+            />
+            <div key={message.id}>
+              <p className="user-name">{message.name}</p>
+              <p className="user-message">{message.text}</p>
+            </div>
           </div>
-        </div>
-      ))}
-      <SendMessage />
+        ))}
+        <SendMessage />
+      </div>
     </div>
   );
 };
