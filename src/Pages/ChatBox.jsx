@@ -9,6 +9,8 @@ import {
   orderBy,
   onSnapshot,
   limit,
+  doc,
+  deleteDoc
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import SideBar from "../components/SideBar";
@@ -16,7 +18,7 @@ import SideBar from "../components/SideBar";
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
   const [user] = useAuthState(auth);
- 
+
   useEffect(() => {
     const q = query(
       collection(db, "messages"),
@@ -30,12 +32,20 @@ const ChatBox = () => {
       });
       setMessages(messages);
     });
-    return () => unsubscribe;
+    return () => unsubscribe();
   }, []);
-  const deleteMessages = (id)=>{
-   const deleted =  messages.filter(item => item.id !== id)
-   setMessages(deleted)
-  }
+
+  const deleteMessage = (id) => {
+    deleteDoc(doc(db, "messages", id)).then(() => {
+      setMessages(messages.filter((message) => message.id !== id));
+    }).catch((error) => {
+      console.error("Error deleting message: ", error);
+    });
+  };
+  
+
+  const scroll = useRef();
+
   return (
     <div className="my_Chat">
       <SideBar />
@@ -43,21 +53,30 @@ const ChatBox = () => {
         ChatBox
         {messages.map((message) => (
           <div
-            className={`chat-bubble ${message.uid === user.uid ? "right" : ""}`}
+            key={message.id}
+            className={`chat-bubble ${
+              message.uid === user.uid ? "right" : ""
+            }`}
           >
             <img
               className="chat-bubble__left"
               src={message.avatar}
               alt="user avatar"
             />
-            <div key={message.id}>
+            <div className="my_message">
               <p className="user-name">{message.name}</p>
               <p className="user-message">{message.text}</p>
-              <p className="del" onClick = {()=>deleteMessages(message.id)}>delete</p>
+              <p className="del" onClick={() => deleteMessage(message.id)}>
+                delete
+              </p>
             </div>
           </div>
         ))}
-        <SendMessage />
+        <main className="chat-box">
+          {/* when a new message enters the chat, the screen scrolls down to the scroll div */}
+          <span ref={scroll}></span>
+          <SendMessage scroll={scroll} />
+        </main>
       </div>
     </div>
   );

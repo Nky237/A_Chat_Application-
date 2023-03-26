@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { auth, db } from "../firebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
-const SendMessage = () => {
+const SendMessage = ({scroll}) => {
     const [val, setValue] = useState('')
     const sendMessage = async (e) => {
         e.preventDefault();
@@ -19,7 +19,9 @@ const SendMessage = () => {
           uid,
         });
         setValue("");
+    scroll.current.scrollIntoView({ behavior: "smooth" });
       };
+      
   return (
     <form onSubmit={(e) => sendMessage(e)} className='chat'>
          <p>{val}</p>
