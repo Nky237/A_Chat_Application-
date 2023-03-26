@@ -1,0 +1,109 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.welcome{
+  width: 100%;
+  height: 100vh;
+}
+.wel-nav{
+  height: 70px;
+  width: 100%;
+  background-color: #4C768D;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+.wel-nav img{
+  height: 40px;
+  width: 170px;
+}
+.wel-nav h1{
+  font-size: 23px;
+  color: black;
+}
+.welBody{
+height: calc(100vh - 70px);
+background-color: #1C2C4C;
+display: flex;
+flex-direction: column;
+align-items: center;
+line-height: 70px;
+color: #6DBAD3;
+padding-top: 60px;
+}
+.welBody .Logo{
+  height: 50px;
+  width: 100px;
+}
+.chatty{
+  height: 100vh;
+}
+.chat{
+  display: flex;
+  flex-direction: column;
+ 
+}
+.chatText{
+  display: flex;
+  align-items: end;
+  height: calc(100vh - 100px);
+  width: 60%;
+  margin: auto;
+  gap: 30px;
+}
+.chatText input{
+  width: 100%;
+  height: 40px;
+  border-radius: 15px;
+}
+.chatText button{
+  height: 40px;
+  border: none;
+  width: 120px;
+}
+
+/* chat component */
+.messages-wrapper {
+  padding: 30px;
+  margin-bottom: 60px;
+}
+.chat-bubble {
+  border-radius: 20px 20px 20px 0;
+  padding: 15px;
+  background-color: #7cc5d9;
+  color: #1c2c4c;
+  width: max-content;
+  max-width: calc(100% - 50px);
+  box-shadow: -2px 2px 1px 1px #4c768d;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.chat-bubble.right {
+  margin-left: auto;
+  border-radius: 20px 20px 0 20px;
+  background-color: #fff;
+  box-shadow: -2px 2px 1px 1px #88dded;
+}
+.chat-bubble__left {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.user-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #1c2c4c;
+}
+.user-message {
+  word-break: break-all;
+}
+.message-time {
+  display: block;
+  text-align: right;
+}
