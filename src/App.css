@@ -44,15 +44,11 @@ padding-top: 60px;
 
 .my_Chat{
   display: flex;
+  height: 100vh !important;
+  overflow-y: hidden;
 
 }
-.side{
-  border: 1px solid black;
-  width: 27%;
-  border-top-right-radius:15px ;
-}
 .chatty{
-  height: 100vh;
   width: 80%;
   margin-right: 30px;
 }
@@ -64,7 +60,7 @@ padding-top: 60px;
 .chatText{
   display: flex;
   align-items: end;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 60px);
   width: 60%;
   margin: auto;
   gap: 30px;
@@ -79,7 +75,53 @@ padding-top: 60px;
   border: none;
   width: 120px;
 }
-
+/* sice bar */
+.side{
+  border: 1px solid black;
+  width: 27%;
+  border-top-right-radius:15px ;
+  background: linear-gradient(#31297C, #463A8E);
+}
+.message_componrnt{
+  display: flex;
+  color: white;
+  gap: 20px;
+  padding-top: 30px ;
+  padding-left: 10px;
+}
+.message_componrnt:hover{
+  cursor: pointer;
+}
+.message_componrnt p{
+  font-weight: 100;
+  color: #7973AF;
+}
+.message_componrnt img{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.log p{
+  color: red;
+  font-weight: 300px;
+  font-size: 22px;
+  word-spacing: 3px;
+  padding-left: 20px;
+  padding-top: 30px;
+}
+.log p:hover{
+cursor: pointer;
+}
+.icon{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.iconItem{
+  display: flex;
+  gap: 20px;
+  
+}
 /* chat component */
 .messages-wrapper {
   padding: 30px;
@@ -123,4 +165,7 @@ padding-top: 60px;
 .message-time {
   display: block;
   text-align: right;
+}
+.del:hover{
+  cursor: pointer;
 }

@@ -16,10 +16,7 @@ import SideBar from "../components/SideBar";
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
   const [user] = useAuthState(auth);
-  const logout = () => {
-    // setUser(false);
-    alert("hello");
-  };
+ 
   useEffect(() => {
     const q = query(
       collection(db, "messages"),
@@ -35,12 +32,15 @@ const ChatBox = () => {
     });
     return () => unsubscribe;
   }, []);
+  const deleteMessages = (id)=>{
+   const deleted =  messages.filter(item => item.id !== id)
+   setMessages(deleted)
+  }
   return (
     <div className="my_Chat">
       <SideBar />
       <div className="chatty">
         ChatBox
-        <button onClick={logout}>Log out</button>
         {messages.map((message) => (
           <div
             className={`chat-bubble ${message.uid === user.uid ? "right" : ""}`}
@@ -53,6 +53,7 @@ const ChatBox = () => {
             <div key={message.id}>
               <p className="user-name">{message.name}</p>
               <p className="user-message">{message.text}</p>
+              <p className="del" onClick = {()=>deleteMessages(message.id)}>delete</p>
             </div>
           </div>
         ))}
