@@ -72,11 +72,9 @@ const ChatBox = () => {
             </div>
           </div>
         ))}
-        <main className="chat-box">
           {/* when a new message enters the chat, the screen scrolls down to the scroll div */}
           <span ref={scroll}></span>
           <SendMessage scroll={scroll} />
-        </main>
       </div>
     </div>
   );
